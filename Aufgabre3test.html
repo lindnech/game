@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stein-Schere-Papier Spiel</title>
+    <style>
+    /*css:*/
+
+    @keyframes blink /*das ist fuer das blinkende ergebnis ;-)*/{
+        0%{border: 2px solid white;}
+        50%{border: 2px solid red;}
+        100%{border: 2px solid yellow}
+    }
+        body{
+            background-color: lightgreen;
+            text-align: center;
+            font-size: x-large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        button{background-color:chocolate;
+        color: yellow;
+        width: 200px;
+        height: 90px;
+        font-size: xx-large;
+        margin: 20px;
+        justify-content:space-around;
+        border-radius: 15px;
+        }
+        div{background-color: mediumslateblue;
+            align-items: center;
+            margin: 30px;
+            padding: 15px;
+        }
+        .btn{
+            /* background-color: aqua; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+     
+        p{
+            background-color: fuchsia;
+            width:50%;
+            margin: 5px;
+            /* padding: 5px; */
+            display: flex;
+            justify-content: center;
+            font-size: x-large;
+            color:darkblue;
+           margin-left: auto;
+           margin-right: auto;
+           animation: blink 1s linear infinite;
+
+        }
+        /* Styles für das Logo */
+        .LogoLC {
+            height: 50px;
+            width: 50px;
+            font-size: 1rem;
+            background-color: #003366;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        text {
+            fill: white;
+            font-family: Palace Script MT;
+        }
+        h3{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Mein 1. Spiel:</h2>
+        <h1>Stein-Schere-Papier Spiel</h1>
+        <div class="btn">
+            <button id="stein-btn">&#x1F5FF; Stein</button>
+            <button id="schere-btn">&#x2702; Schere</button>
+            <button id="papier-btn">&#x1F4DC; Papier</button>
+        </div>
+        <p id="ergebnis"></p>
+    </div>
+    <h3>
+        <!--Hier beginnt mein Logo Svg-->
+        ©<div class="LogoLC">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <text x="17" y="90" font-size="450%" font-family="Palace Script MT">L</text>
+              <text x="26" y="71" font-size="450%" font-family="Palace Script MT">C</text>
+          </svg>
+        </div>
+    </h3>
+
+    <script>
+        const computerOptionen = ["Stein", "Schere", "Papier"];
+
+        document.getElementById("stein-btn").addEventListener("click", function () {
+            playRound("Stein");
+        });
+
+        document.getElementById("schere-btn").addEventListener("click", function () {
+            playRound("Schere");
+        });
+
+        document.getElementById("papier-btn").addEventListener("click", function () {
+            playRound("Papier");
+        });
+
+        function playRound(spielerWahl) {
+            const computerWahl = computerOptionen[Math.floor(Math.random() * computerOptionen.length)];
+            //Math.random() liefert eine Pseudo Zufallszahl
+            //***.length gibt die Länge von etwas an.
+            //*** Math.floor erwartet eine Zahl als Parameter und liefert Ganzahl.
+            let ergebnis;
+
+            if (spielerWahl === computerWahl) {
+                ergebnis = "Unentschieden";
+            } else if (
+                (spielerWahl === "Stein" && computerWahl === "Schere") ||
+                (spielerWahl === "Schere" && computerWahl === "Papier") ||
+                (spielerWahl === "Papier" && computerWahl === "Stein")
+                //&& beide bedingungen müssen erfüllt sein
+                //=== Gibt true zurück, wenn die beiden Werte gleich und 
+                //      vom selben Datentyp sind.
+                // || ist ein Operator der true zurück gibt wenn linker oder 
+                //      rechter Wert oder beide true sind.
+            ) {
+                ergebnis = "Du hast gewonnen.";
+            } else {
+                ergebnis = "Du hast verloren.";
+            }
+
+            document.getElementById("ergebnis").innerHTML = `Computer: ${computerWahl}<br>Spieler: ${spielerWahl}<br>Ergebnis: ${ergebnis}`;
+        }   
+        //innerHTML es liest Inhalt eines Element und gibt als string zurück,
+        //  es kann aber auch einfügen oder löschen.
+
+        
+        
+    </script>
+</body>
+
+</html>
